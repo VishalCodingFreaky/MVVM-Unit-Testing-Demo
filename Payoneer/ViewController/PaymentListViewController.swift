@@ -47,10 +47,10 @@ class PaymentListViewController: UIViewController {
         }
         
         // Show Error
-        viewModal.output.showError.bind { [self] (_) in
+        viewModal.output.showError.bind { [weak self] (_) in
             DispatchQueue.main.async {
-            self.dismiss(animated: true, completion: {
-                self.showAlert(withMessage: viewModal.output.getErrorMessage())
+                self?.dismiss(animated: true, completion: { [weak self] in
+                    self?.showAlert(withMessage: (self?.viewModal.output.getErrorMessage())!)
             })}
         }
     }

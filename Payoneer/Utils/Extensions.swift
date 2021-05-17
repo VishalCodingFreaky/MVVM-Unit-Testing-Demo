@@ -10,7 +10,8 @@ import UIKit
 // Image load extension
 extension UIImageView {
     func displayImageFrom(link:String, contentMode: UIView.ContentMode) {
-        URLSession.shared.dataTask( with: NSURL(string:link)! as URL, completionHandler: {
+        guard let url = NSURL(string:link) as URL? else { return }
+        URLSession.shared.dataTask( with: url, completionHandler: {
             (data, response, error) -> Void in
             DispatchQueue.main.async {
                 self.contentMode =  contentMode
